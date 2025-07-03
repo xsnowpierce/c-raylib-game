@@ -2,13 +2,13 @@
 // Created by snow on 01/07/25.
 //
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
 
 typedef struct Player {
     float x, y;
+    float vy;
+    int canJump;
     int facingDirection;
-
 } Player;
 
 void InitPlayer(Player *player);
@@ -16,4 +16,5 @@ void UpdatePlayer(Player *player);
 void DrawPlayer(Player player);
 void UnloadPlayer(Player *player);
 
-#endif //PLAYER_H
+struct Rectangle; // forward declare for return type
+struct Rectangle GetPlayerCollider(Player *player);

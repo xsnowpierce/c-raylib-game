@@ -1,9 +1,7 @@
 //
 // Created by snow on 01/07/25.
 //
-
-#ifndef DEFS_H
-#define DEFS_H
+#pragma once
 
 #define SCREEN_SIZE_MULTIPLIER 4
 
@@ -14,4 +12,5 @@
 
 #define PLAYER_MOVE_SPEED 80
 
-#endif //DEFS_H
+// DEBUG
+#define SHOW_WORLD_COLLIDERS true

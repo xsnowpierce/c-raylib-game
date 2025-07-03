@@ -6,12 +6,16 @@
 #include "player.h"
 #include "world.h"
 
+int PLAYER_SCORE;
+int PLAYER_TIME;
+int PLAYER_STAGE;
+
 int main(void) {
-    int SCREEN_WIDTH = GAME_SCREEN_WIDTH * SCREEN_SIZE_MULTIPLIER;
-    int SCREEN_HEIGHT = GAME_SCREEN_HEIGHT * SCREEN_SIZE_MULTIPLIER;
-    int PLAYER_SCORE = 0;
-    int PLAYER_TIME = 250;
-    int PLAYER_STAGE = 1;
+    const int SCREEN_WIDTH = GAME_SCREEN_WIDTH * SCREEN_SIZE_MULTIPLIER;
+    const int SCREEN_HEIGHT = GAME_SCREEN_HEIGHT * SCREEN_SIZE_MULTIPLIER;
+    PLAYER_SCORE = 0;
+    PLAYER_TIME = 250;
+    PLAYER_STAGE = 1;
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE);
     SetConfigFlags(FLAG_VSYNC_HINT);
 
@@ -31,7 +35,7 @@ int main(void) {
     while (!WindowShouldClose()) {
 
         ReadInputs();
-        camera.target = (Vector2) {player.x - 8, camera.target.y};
+        camera.target = (Vector2) {player.x - 8, player.y};//camera.target.y};
         UpdatePlayer(&player);
 
 

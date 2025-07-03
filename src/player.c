@@ -6,6 +6,7 @@
 #include "defs.h"
 #include "input.h"
 #include "raylib.h"
+#include "tilemap.h"
 
 #define SPRITE_WIDTH 16
 #define SPRITE_HEIGHT 32
@@ -23,6 +24,7 @@ typedef struct SpriteAnimation {
     const float animationSpeed;
     const char* animationFrames;
 } SpriteAnimation;
+
 SpriteAnimation walkingAnimation = {0.225f, "1020"};
 SpriteAnimation idleAnimation = {0.0f, "0" };
 SpriteAnimation* currentAnimationData;
@@ -32,7 +34,6 @@ enum PLAYER_ANIMATION_STATE {
     IDLE = 0, WALKING = 1, JUMPING = 2
 };
 enum PLAYER_ANIMATION_STATE currentAnimationState;
-
 
 void InitPlayer(Player *player) {
     player->x = GAME_SCREEN_WIDTH / 2.0f + 8;

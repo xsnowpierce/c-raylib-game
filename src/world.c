@@ -1,17 +1,23 @@
 #include "world.h"
-#include "raylib.h"
 
-Texture2D mapImage;
-Rectangle spriteRect;
+#include "defs.h"
+#include "tilemap.h"
+
+TileMap worldMap;
 
 void CreateWorld() {
-    mapImage = LoadTexture("resources/map.png");
+    LoadTileMap(&worldMap, "resources/map.json", "resources/tileset.png");
 }
 
 void DrawWorld() {
-    DrawTexture(mapImage, 0, 0, WHITE);
+    DrawTileMap(&worldMap);
+
+    if (SHOW_WORLD_COLLIDERS) {
+        DrawDebugCollisionRects();
+    }
 }
 
 void UnloadWorld() {
-    UnloadTexture(mapImage);
+    UnloadTexture(worldMap.tileset);
 }
+

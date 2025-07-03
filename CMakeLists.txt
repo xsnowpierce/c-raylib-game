@@ -11,6 +11,10 @@ add_executable(game src/main.c
         src/player.c
         src/world.c
         src/world.h
+        src/tilemap.c
+        src/tilemap.h
+        src/parson.c
+        src/parson.h
 )
 
 include_directories(resources)
