@@ -6,7 +6,11 @@
 
 CollisionRects collisionRects;
 
-void MergeCollisionTiles(TileMap *map, CollisionRects *outRects) {
+CollisionRects GetCollisionRects() {
+    return collisionRects;
+}
+
+void MergeCollisionTiles(const TileMap *map, CollisionRects *outRects) {
     int w = map->collisionLayer.width;
     int h = map->collisionLayer.height;
 
@@ -28,7 +32,6 @@ void MergeCollisionTiles(TileMap *map, CollisionRects *outRects) {
                 xEnd++;
             }
 
-            // Now try to extend vertically for all columns in [x..xEnd]
             int yEnd = y;
             bool canExtend = true;
             while (canExtend && yEnd + 1 < h) {
@@ -135,17 +138,17 @@ void LoadTileMap(TileMap *map, const char *mapFile, const char *tilesetFile) {
 }
 
 
-void DrawTileMap(TileMap *map) {
+void DrawTileMap(const TileMap *map) {
     for (int y = 0; y < map->groundLayer.height; y++) {
         for (int x = 0; x < map->groundLayer.width; x++) {
-            int tileIndex = map->groundLayer.tiles[y * map->groundLayer.width + x];
+            const int tileIndex = map->groundLayer.tiles[y * map->groundLayer.width + x];
             if (tileIndex > 0) {
-                Rectangle src = {
-                    (tileIndex - 1 % (map->tileset.width / TILE_SIZE)) * TILE_SIZE,
-                    (tileIndex / (map->tileset.width / TILE_SIZE)) * TILE_SIZE,
+                const Rectangle src = {
+                    (float) (tileIndex - 1 % (map->tileset.width / TILE_SIZE)) * TILE_SIZE,
+                    (float) (tileIndex / (map->tileset.width / TILE_SIZE)) * TILE_SIZE,
                     TILE_SIZE, TILE_SIZE
                 };
-                Vector2 pos = { x * TILE_SIZE, y * TILE_SIZE };
+                const Vector2 pos = { (float) x * TILE_SIZE, (float) y * TILE_SIZE };
                 DrawTextureRec(map->tileset, src, pos, WHITE);
             }
         }

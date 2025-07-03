@@ -46,7 +46,7 @@ int main(void) {
         BeginMode2D(camera);
 
         DrawWorld();
-        DrawPlayer(player);
+        DrawPlayer(&player);
 
         EndMode2D();
 

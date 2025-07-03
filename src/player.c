@@ -37,7 +37,7 @@ enum PLAYER_ANIMATION_STATE currentAnimationState;
 
 void InitPlayer(Player *player) {
     player->x = GAME_SCREEN_WIDTH / 2.0f + 8;
-    player->y = GAME_SCREEN_HEIGHT - 16;
+    player->y = GAME_SCREEN_HEIGHT - 32;
     texture = LoadTexture("resources/penguin.png");
 
     sourceRect = (Rectangle){ 0.0f, 0.0f, SPRITE_WIDTH, SPRITE_HEIGHT };
@@ -97,17 +97,70 @@ void UpdateSprite(Player *player) {
     sourceRect.x = 16 * frameValue;
 }
 
-void UpdatePlayer(Player *player) {
+void TryMove(Player *player, float dx, float dy, const CollisionRects *collisionRects, bool *collided, bool snapToSurface) {
+    Rectangle targetRect = GetPlayerCollider(player);
+    targetRect.x += dx;
+    targetRect.y += dy;
+
+    for (int i = 0; i < collisionRects->count; i++) {
+        Rectangle col = collisionRects->rects[i];
+
+        if (CheckCollisionRecs(targetRect, col)) {
+            if (collided) *collided = true;
+
+            // player snapping to ground code
+            if (snapToSurface && dy > 0.0f) {
+                float playerBottom = GetPlayerCollider(player).y + GetPlayerCollider(player).height;
+                float groundY = col.y;
+                float snapAmount = groundY - playerBottom;
+                player->y += snapAmount;
+            }
+
+            // player has collided, dont apply movement
+            return;
+        }
+    }
+
+    player->x += dx;
+    player->y += dy;
+    if (collided) *collided = false;
+}
+
+void PlayerMovement(Player *player) {
+    // Update rect position to calculated player position
     destRect.x = player->x;
     destRect.y = player->y;
 
-    player->x += (float) PLAYER_INPUT_X * GetFrameTime() * PLAYER_MOVE_SPEED;
+    const CollisionRects collisionRects = GetCollisionRects();
+    float frameTime = GetFrameTime();
 
+    // calculate X movement
+    float moveX = (float)PLAYER_INPUT_X * frameTime * PLAYER_MOVE_SPEED;
+    TryMove(player, moveX, 0.0f, &collisionRects, NULL, false);
+
+    // calculate Y movement
+    float moveY = PLAYER_GRAVITY_SCALE * frameTime;
+    bool hitGround = false;
+    TryMove(player, 0.0f, moveY, &collisionRects, &hitGround, true);
+
+    player->isGrounded = hitGround;
+}
+
+
+void UpdatePlayer(Player *player) {
+    PlayerMovement(player);
     UpdateSprite(player);
 }
 
-void DrawPlayer(Player player) {
+Rectangle GetPlayerCollider(Player *player) {
+    return (Rectangle) {destRect.x - SPRITE_WIDTH, destRect.y - SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT};
+}
+
+void DrawPlayer(Player *player) {
     DrawTexturePro(texture, sourceRect, destRect, origin, 0.f, WHITE);
+    if (SHOW_WORLD_COLLIDERS) {
+        DrawRectangleLinesEx(GetPlayerCollider(player), 1, GREEN);
+    }
 }
 
 void UnloadPlayer(Player *player) {

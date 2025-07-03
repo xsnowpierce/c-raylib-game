@@ -7,13 +7,13 @@
 typedef struct Player {
     float x, y;
     float vy;
-    int canJump;
+    int isGrounded;
     int facingDirection;
 } Player;
 
 void InitPlayer(Player *player);
 void UpdatePlayer(Player *player);
-void DrawPlayer(Player player);
+void DrawPlayer(Player *player);
 void UnloadPlayer(Player *player);
 
 struct Rectangle; // forward declare for return type

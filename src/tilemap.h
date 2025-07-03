@@ -27,6 +27,7 @@ typedef struct {
 
 
 void LoadTileMap(TileMap *map, const char *mapFile, const char *tilesetFile);
-void DrawTileMap(TileMap *map);
+void DrawTileMap(const TileMap *map);
 void DrawDebugCollisionRects();
+CollisionRects GetCollisionRects();
 //bool IsTileSolidAt(TileMap *map, int tileX, int tileY);
