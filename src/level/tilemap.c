@@ -2,7 +2,7 @@
 #include "raylib.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "parson.h"
+#include "../lib/parson.h"
 
 CollisionRects collisionRects;
 

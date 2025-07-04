@@ -2,10 +2,19 @@
 #include "raylib.h"
 
 int PLAYER_INPUT_X = 0;
+int PLAYER_INPUT_JUMP = 0;
 
 void ReadInputs() {
+
+    // RESET INPUTS
+    PLAYER_INPUT_JUMP = 0;
+
     bool PLAYER_LEFT = IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT);
     bool PLAYER_RIGHT = IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT);
+
+    if (IsKeyDown(KEY_SPACE)) {
+        PLAYER_INPUT_JUMP = 1;
+    }
 
     if (PLAYER_LEFT && PLAYER_RIGHT) {
         PLAYER_INPUT_X = 0;

@@ -4,5 +4,6 @@
 #pragma once
 
 extern int PLAYER_INPUT_X;
+extern int PLAYER_INPUT_JUMP;
 
 void ReadInputs();

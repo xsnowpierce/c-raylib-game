@@ -1,6 +1,6 @@
 #include "world.h"
 
-#include "defs.h"
+#include "../defs.h"
 #include "tilemap.h"
 
 TileMap worldMap;

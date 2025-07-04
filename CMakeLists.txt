@@ -7,14 +7,18 @@ add_executable(game src/main.c
         src/input.c
         src/input.h
         src/defs.h
-        src/player.h
-        src/player.c
-        src/world.c
-        src/world.h
-        src/tilemap.c
-        src/tilemap.h
-        src/parson.c
-        src/parson.h
+        src/player/player.h
+        src/player/player.c
+        src/level/world.c
+        src/level/world.h
+        src/level/tilemap.c
+        src/level/tilemap.h
+        src/lib/parson.c
+        src/lib/parson.h
+        src/player/player_movement.c
+        src/player/player_movement.h
+        src/player/player_sprite.c
+        src/player/player_sprite.h
 )
 
 include_directories(resources)

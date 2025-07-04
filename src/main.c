@@ -3,8 +3,8 @@
 #include "defs.h"
 #include "raylib.h"
 #include "input.h"
-#include "player.h"
-#include "world.h"
+#include "player/player.h"
+#include "level/world.h"
 
 int PLAYER_SCORE;
 int PLAYER_TIME;
@@ -25,7 +25,7 @@ int main(void) {
     CreateWorld();
 
     Camera2D camera;
-    camera.target = (Vector2) {player.x, player.y + 8};
+    camera.target = (Vector2) {player.x, GAME_SCREEN_HEIGHT - 8};
     camera.offset = (Vector2) {GAME_SCREEN_WIDTH * SCREEN_SIZE_MULTIPLIER / 2.0f, (GAME_SCREEN_HEIGHT - 24) * SCREEN_SIZE_MULTIPLIER};
     camera.rotation = 0;
     camera.zoom = SCREEN_SIZE_MULTIPLIER;
@@ -33,9 +33,8 @@ int main(void) {
     Font font = LoadFontEx("resources/haunted-castle.ttf", 8, 0, 250);
 
     while (!WindowShouldClose()) {
-
         ReadInputs();
-        camera.target = (Vector2) {player.x - 8, player.y};//camera.target.y};
+        camera.target = (Vector2) {player.x - 8, camera.target.y};
         UpdatePlayer(&player);
 
 
