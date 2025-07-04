@@ -2,17 +2,15 @@
 #include "raylib.h"
 #include "../input.h"
 #include <string.h>
-#include <stdio.h>
 
 #include "../defs.h"
 
-#define SPRITE_WIDTH 16
-#define SPRITE_HEIGHT 32
+
 
 Texture2D texture;
 Rectangle sourceRect;
 Rectangle destRect;
-Vector2 origin = { SPRITE_WIDTH, SPRITE_HEIGHT };
+Vector2 origin = { SPRITE_WIDTH / 2.0f, SPRITE_HEIGHT };
 
 float currentSpriteChangeTime = 0.f;
 int currentSpriteIndex = 0;
@@ -38,13 +36,14 @@ void InitPlayerAnimation() {
     currentAnimationData = &idleAnimation;
 }
 
-void UpdateAnimationState(Player* player) {
+void UpdateAnimationState(const Player* player) {
     enum PLAYER_ANIMATION_STATE targetAnimationState;
 
-    if (!player->isGrounded) {
-        targetAnimationState = JUMPING;
-        currentAnimationData = &jumpingAnimation;
-    } else if (PLAYER_INPUT_X == 0) {
+    //if (!player->isGrounded) {
+    //    targetAnimationState = JUMPING;
+    //    currentAnimationData = &jumpingAnimation;
+    //} else
+        if (PLAYER_INPUT_X == 0) {
         targetAnimationState = IDLE;
         currentAnimationData = &idleAnimation;
     } else {
@@ -81,7 +80,7 @@ void UpdatePlayerAnimation(Player *player) {
     }
 
     const int frameValue = currentAnimationData->animationFrames[currentSpriteIndex] - '0';
-    sourceRect.x = 16 * frameValue;
+    sourceRect.x = 16.f * frameValue;
 
     destRect.x = player->x;
     destRect.y = player->y;

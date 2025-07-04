@@ -30,13 +30,13 @@ int main(void) {
     camera.rotation = 0;
     camera.zoom = SCREEN_SIZE_MULTIPLIER;
 
-    Font font = LoadFontEx("resources/haunted-castle.ttf", 8, 0, 250);
+    const Font font = LoadFontEx("resources/haunted-castle.ttf", 8, 0, 74);
 
     while (!WindowShouldClose()) {
         ReadInputs();
         camera.target = (Vector2) {player.x - 8, camera.target.y};
         UpdatePlayer(&player);
-
+        printf("player is grounded: %d\n", player.isGrounded);
 
         BeginDrawing();
 

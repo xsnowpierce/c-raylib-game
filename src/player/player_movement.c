@@ -6,50 +6,66 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-#define PLAYER_JUMP_SPEED -220.0f
-#define PLAYER_GRAVITY 400.0f
-#define MAX_JUMP_TIME 0.25f
+#define PLAYER_JUMP_SPEED (-220.0f)
+#define PLAYER_GRAVITY 600.0f
+#define MAX_JUMP_TIME 0.1f
 
 static float jumpVelocity = 0.0f;
 static float currentJumpTime = 0.0f;
 static bool isJumping = false;
 
-void TryMove(Player *player, float dx, float dy, const CollisionRects *collisionRects, bool *collided, bool snapToSurface) {
+bool MovePlayer(Player *player, const float dx, const float dy, bool snapToSurface) {
+    bool collided = false;
+    const CollisionRects collisionRects = GetCollisionRects();
+    // get target collider after movement applied
     Rectangle targetRect = GetPlayerCollider(player);
     targetRect.x += dx;
     targetRect.y += dy;
 
-    for (int i = 0; i < collisionRects->count; i++) {
-        Rectangle col = collisionRects->rects[i];
+    // check collision against all colliders in the scene
+    // this should be probably improved later, only needing to check colliders
+    // near the player.
+    for (int i = 0; i < collisionRects.count; i++) {
+        const Rectangle col = collisionRects.rects[i];
         if (CheckCollisionRecs(targetRect, col)) {
-            if (collided) *collided = true;
+            collided = true;
 
             if (snapToSurface && dy > 0.0f) {
-                float snapAmount = col.y - (GetPlayerCollider(player).y + GetPlayerCollider(player).height);
-                player->y += snapAmount;
+                float playerBottom = GetPlayerCollider(player).y + GetPlayerCollider(player).height;
+                float groundY = col.y;
+                float snapAmount = groundY - playerBottom;
+
+                if (snapAmount >= 0.0f && snapAmount <= 2.0f) {
+                    player->y += snapAmount;
+                    return true;
+                }
             }
-            return;
+
+            return collided;
         }
     }
 
     player->x += dx;
     player->y += dy;
-    if (collided) *collided = false;
+    return false;
 }
 
 void UpdatePlayerMovement(Player *player) {
-    const CollisionRects collisionRects = GetCollisionRects();
-    float frameTime = GetFrameTime();
 
-    float moveX = 0.0f;
-    if (player->isGrounded) {
-        moveX = (float)PLAYER_INPUT_X * frameTime * PLAYER_MOVE_SPEED;
-        player->storedJumpDirection = PLAYER_INPUT_X;
-    } else {
-        moveX = (float)player->storedJumpDirection * frameTime * PLAYER_MOVE_SPEED;
+    const float frameTime = GetFrameTime();
+
+    // X movement
+    {
+        float moveX = 0.0f;
+        if (player->isGrounded) {
+            moveX = (float)PLAYER_INPUT_X * frameTime * PLAYER_MOVE_SPEED;
+            player->storedJumpDirection = PLAYER_INPUT_X;
+        } else {
+            moveX = (float)player->storedJumpDirection * frameTime * PLAYER_MOVE_SPEED;
+        }
+        MovePlayer(player, moveX, 0.0f, false);
     }
 
-    TryMove(player, moveX, 0.0f, &collisionRects, NULL, false);
 
     if (PLAYER_INPUT_JUMP && player->isGrounded && !isJumping) {
         isJumping = true;
@@ -62,11 +78,10 @@ void UpdatePlayerMovement(Player *player) {
         isJumping = false;
     }
 
-    float verticalVelocity = jumpVelocity + PLAYER_GRAVITY * currentJumpTime;
-    float moveY = verticalVelocity * frameTime;
+    const float verticalVelocity = jumpVelocity + PLAYER_GRAVITY * currentJumpTime;
+    const float moveY = verticalVelocity * frameTime;
 
-    bool hitGround = false;
-    TryMove(player, 0.0f, moveY, &collisionRects, &hitGround, true);
+    const bool hitGround = MovePlayer(player, 0.0f, moveY, true);
 
     if (hitGround) {
         isJumping = false;

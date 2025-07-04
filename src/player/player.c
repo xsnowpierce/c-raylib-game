@@ -30,7 +30,12 @@ void UnloadPlayer(Player *player) {
     UnloadPlayerAnimation();
 }
 
-Rectangle GetPlayerCollider(Player *player) {
-    extern Rectangle destRect;
-    return (Rectangle){ destRect.x - 16, destRect.y - 32, 16, 32 };
+Rectangle GetPlayerCollider(const Player *player) {
+    return (Rectangle){
+        player->x - SPRITE_WIDTH / 2,
+        player->y - SPRITE_HEIGHT,
+        SPRITE_WIDTH,
+        SPRITE_HEIGHT
+    };
 }
+
