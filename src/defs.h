@@ -14,4 +14,4 @@
 #define PLAYER_GRAVITY_SCALE 80
 
 // DEBUG
-#define SHOW_WORLD_COLLIDERS true
+#define SHOW_WORLD_COLLIDERS false

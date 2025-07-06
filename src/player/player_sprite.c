@@ -22,27 +22,25 @@ typedef struct SpriteAnimation {
 
 SpriteAnimation idleAnimation = {0.0f, "0"};
 SpriteAnimation walkingAnimation = {0.225f, "1020"};
-SpriteAnimation jumpingAnimation = {0.0f, "1"};
+SpriteAnimation jumpingAnimation = {0.0f, "3"};
 SpriteAnimation* currentAnimationData;
 
-enum PLAYER_ANIMATION_STATE { IDLE, WALKING, JUMPING };
-enum PLAYER_ANIMATION_STATE currentAnimationState;
+enum PLAYER_ANIMATION_STATE currentAnimationState = IDLE;
 
 void InitPlayerAnimation() {
     texture = LoadTexture("resources/penguin.png");
     sourceRect = (Rectangle){ 0.0f, 0.0f, SPRITE_WIDTH, SPRITE_HEIGHT };
     destRect = (Rectangle){ 0.0f, 0.0f, SPRITE_WIDTH, SPRITE_HEIGHT };
-    currentAnimationState = IDLE;
     currentAnimationData = &idleAnimation;
 }
 
 void UpdateAnimationState(const Player* player) {
     enum PLAYER_ANIMATION_STATE targetAnimationState;
 
-    //if (!player->isGrounded) {
-    //    targetAnimationState = JUMPING;
-    //    currentAnimationData = &jumpingAnimation;
-    //} else
+    if (!player->isGrounded) {
+        targetAnimationState = JUMPING;
+        currentAnimationData = &jumpingAnimation;
+    } else
         if (PLAYER_INPUT_X == 0) {
         targetAnimationState = IDLE;
         currentAnimationData = &idleAnimation;

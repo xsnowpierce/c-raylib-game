@@ -9,10 +9,12 @@
 
 typedef struct Player {
     float x, y;
-    int facingDirection;
-    bool isGrounded, isJumping;
+    float velocityY;
     int storedJumpDirection;
+    int facingDirection;
+    bool isGrounded;
 } Player;
+
 
 void InitPlayer(Player *player);
 void UpdatePlayer(Player *player);

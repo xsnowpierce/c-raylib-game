@@ -34,7 +34,7 @@ Rectangle GetPlayerCollider(const Player *player) {
     return (Rectangle){
         player->x - SPRITE_WIDTH / 2,
         player->y - SPRITE_HEIGHT,
-        SPRITE_WIDTH,
+        SPRITE_WIDTH - 1,
         SPRITE_HEIGHT
     };
 }
