@@ -3,6 +3,7 @@
 
 int PLAYER_INPUT_X = 0;
 int PLAYER_INPUT_JUMP = 0;
+int PLAYER_INPUT_DOWN = 0;
 
 void ReadInputs() {
 
@@ -11,6 +12,8 @@ void ReadInputs() {
 
     bool PLAYER_LEFT = IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT);
     bool PLAYER_RIGHT = IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT);
+
+    PLAYER_INPUT_DOWN = IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN);
 
     if (IsKeyDown(KEY_SPACE)) {
         PLAYER_INPUT_JUMP = 1;

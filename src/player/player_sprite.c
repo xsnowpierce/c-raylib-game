@@ -23,6 +23,7 @@ typedef struct SpriteAnimation {
 SpriteAnimation idleAnimation = {0.0f, "0"};
 SpriteAnimation walkingAnimation = {0.225f, "1020"};
 SpriteAnimation jumpingAnimation = {0.0f, "3"};
+SpriteAnimation crouchingAnimation = {0.0f, "4"};
 SpriteAnimation* currentAnimationData;
 
 enum PLAYER_ANIMATION_STATE currentAnimationState = IDLE;
@@ -40,13 +41,22 @@ void UpdateAnimationState(const Player* player) {
     if (!player->isGrounded) {
         targetAnimationState = JUMPING;
         currentAnimationData = &jumpingAnimation;
-    } else
-        if (PLAYER_INPUT_X == 0) {
-        targetAnimationState = IDLE;
-        currentAnimationData = &idleAnimation;
-    } else {
-        targetAnimationState = WALKING;
-        currentAnimationData = &walkingAnimation;
+    }
+    else {
+        if (player->isCrouching) {
+            targetAnimationState = CROUCHING;
+            currentAnimationData = &crouchingAnimation;
+        }
+        else {
+            if (PLAYER_INPUT_X == 0) {
+                targetAnimationState = IDLE;
+                currentAnimationData = &idleAnimation;
+            }
+            else {
+                targetAnimationState = WALKING;
+                currentAnimationData = &walkingAnimation;
+            }
+        }
     }
 
     if (targetAnimationState != currentAnimationState) {
@@ -88,6 +98,7 @@ void DrawPlayerAnimation(Player *player) {
     DrawTexturePro(texture, sourceRect, destRect, origin, 0.f, WHITE);
     if (SHOW_WORLD_COLLIDERS) {
         DrawRectangleLinesEx(GetPlayerCollider(player), 1, GREEN);
+        DrawRectangleLinesEx(GetPlayerHitbox(player), 1, BLUE);
     }
 }
 

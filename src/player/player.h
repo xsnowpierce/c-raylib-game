@@ -12,6 +12,7 @@ typedef struct Player {
     float velocityY;
     int storedJumpDirection;
     int facingDirection;
+    bool isCrouching;
     bool isGrounded;
 } Player;
 
@@ -21,5 +22,6 @@ void UpdatePlayer(Player *player);
 void DrawPlayer(Player *player);
 void UnloadPlayer(Player *player);
 Rectangle GetPlayerCollider(const Player *player);
+Rectangle GetPlayerHitbox(const Player *player);
 
 #endif

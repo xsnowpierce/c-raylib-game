@@ -61,12 +61,21 @@ void UpdatePlayerMovement(Player *player) {
         PLAYER_JUMPED_THIS_INPUT = false;
     }
 
-    if (player->isGrounded && postJumpRecoveryTime > 0.0f) {
-        postJumpRecoveryTime -= frameTime;
+    if (player->isGrounded) {
+        if (postJumpRecoveryTime > 0.0f) {
+            postJumpRecoveryTime -= frameTime;
+        }
+
+        if (PLAYER_INPUT_DOWN) {
+            player->isCrouching = true;
+        }
+        else player->isCrouching = false;
+
+
     }
 
     // X movement
-    {
+    if (!player->isCrouching) {
         float moveX = 0.0f;
         if (player->isGrounded) {
             moveX = (float)PLAYER_INPUT_X * frameTime * PLAYER_MOVE_SPEED;

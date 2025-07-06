@@ -12,6 +12,7 @@ void InitPlayer(Player *player) {
     player->y = GAME_SCREEN_HEIGHT - 144;
     player->facingDirection = 1;
     player->isGrounded = false;
+    player->isCrouching = false;
     player->storedJumpDirection = 0;
 
     InitPlayerAnimation();
@@ -39,3 +40,33 @@ Rectangle GetPlayerCollider(const Player *player) {
     };
 }
 
+Rectangle GetPlayerHitbox(const Player *player) {
+
+    // STANDARD HITBOX
+    if (!player->isCrouching && player->isGrounded) {
+        return (Rectangle){
+            player->x - SPRITE_WIDTH / 2,
+            player->y - SPRITE_HEIGHT,
+            SPRITE_WIDTH - 1,
+            SPRITE_HEIGHT
+        };
+    }
+
+    // CROUCHING HITBOX
+    else if (player->isCrouching && player->isGrounded) {
+        return (Rectangle){
+            player->x - SPRITE_WIDTH / 2,
+            player->y - SPRITE_HEIGHT + 12,
+            SPRITE_WIDTH - 1,
+            20
+        };
+    }
+
+    // JUMPING HITBOX
+    return (Rectangle){
+        player->x - SPRITE_WIDTH / 2,
+        player->y - SPRITE_HEIGHT + 4,
+        SPRITE_WIDTH - 1,
+        20
+    };
+}

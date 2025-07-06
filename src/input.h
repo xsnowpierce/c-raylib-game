@@ -5,5 +5,6 @@
 
 extern int PLAYER_INPUT_X;
 extern int PLAYER_INPUT_JUMP;
+extern int PLAYER_INPUT_DOWN;
 
 void ReadInputs();
