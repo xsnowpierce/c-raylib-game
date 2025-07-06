@@ -9,7 +9,7 @@
 
 void InitPlayer(Player *player) {
     player->x = GAME_SCREEN_WIDTH / 2.0f + 8;
-    player->y = GAME_SCREEN_HEIGHT - 32;
+    player->y = GAME_SCREEN_HEIGHT - 144;
     player->facingDirection = 1;
     player->isGrounded = false;
     player->storedJumpDirection = 0;

@@ -25,7 +25,7 @@ int main(void) {
     CreateWorld();
 
     Camera2D camera;
-    camera.target = (Vector2) {player.x, GAME_SCREEN_HEIGHT - 8};
+    camera.target = (Vector2) {player.x, GAME_SCREEN_HEIGHT - 128 - 8};
     camera.offset = (Vector2) {GAME_SCREEN_WIDTH * SCREEN_SIZE_MULTIPLIER / 2.0f, (GAME_SCREEN_HEIGHT - 24) * SCREEN_SIZE_MULTIPLIER};
     camera.rotation = 0;
     camera.zoom = SCREEN_SIZE_MULTIPLIER;
@@ -36,11 +36,11 @@ int main(void) {
         ReadInputs();
         camera.target = (Vector2) {player.x - 8, camera.target.y};
         UpdatePlayer(&player);
-        printf("player is grounded: %d\n", player.isGrounded);
+        //printf("player is grounded: %d\n", player.isGrounded);
 
         BeginDrawing();
 
-        ClearBackground(RAYWHITE);
+        ClearBackground(BLACK);
 
         BeginMode2D(camera);
 
