@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include <stdio.h>
 
+#define PLAYER_MOVE_SPEED 80
 #define PLAYER_JUMP_SPEED (-220.0f)
 #define PLAYER_GRAVITY 600.0f
 #define MAX_JUMP_TIME 0.1f

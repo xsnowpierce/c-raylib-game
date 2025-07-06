@@ -10,8 +10,6 @@
 
 #define SCREEN_TITLE "Game"
 
-#define PLAYER_MOVE_SPEED 80
-#define PLAYER_GRAVITY_SCALE 80
 
 // DEBUG
-#define SHOW_WORLD_COLLIDERS true
+#define SHOW_WORLD_COLLIDERS false
