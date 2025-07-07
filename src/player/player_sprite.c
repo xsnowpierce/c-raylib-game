@@ -1,9 +1,14 @@
 #include "player_sprite.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "raylib.h"
 #include "../input.h"
 #include <string.h>
 
 #include "../defs.h"
+#include "../sprite/sprite.h"
 
 
 
@@ -13,17 +18,74 @@ Rectangle destRect;
 Vector2 origin = { SPRITE_WIDTH / 2.0f, SPRITE_HEIGHT };
 
 float currentSpriteChangeTime = 0.f;
+float currentSpriteDelayTime = 0.f;
 int currentSpriteIndex = 0;
 
-typedef struct SpriteAnimation {
-    const float animationSpeed;
-    const char* animationFrames;
-} SpriteAnimation;
+SpriteAnimation idleAnimation = {
+    .animationSpeed = 0.0f,
+    .rightSprites = {
+        {.spriteX = 0, .spriteY = 0, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT }
+    },
+    .leftSprites = {
+        {.spriteX = 0, .spriteY = 32, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT }
+    },
+    .spriteCount = 1
+};
 
-SpriteAnimation idleAnimation = {0.0f, "0"};
-SpriteAnimation walkingAnimation = {0.225f, "1020"};
-SpriteAnimation jumpingAnimation = {0.0f, "2"};
-SpriteAnimation crouchingAnimation = {0.0f, "3"};
+SpriteAnimation walkingAnimation = {
+    .animationSpeed = 0.225f,
+    .rightSprites = {
+        {.spriteX = 16, .spriteY = 0, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT },
+        {.spriteX = 0, .spriteY = 0, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT },
+        {.spriteX = 32, .spriteY = 0, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT },
+        {.spriteX = 0, .spriteY = 0, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT }
+    },
+    .leftSprites = {
+        {.spriteX = 16, .spriteY = 32, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT },
+        {.spriteX = 0, .spriteY = 32, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT },
+        {.spriteX = 32, .spriteY = 32, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT },
+        {.spriteX = 0, .spriteY = 32, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT }
+    },
+    .spriteCount = 4
+};
+
+SpriteAnimation jumpingAnimation = {
+    .animationSpeed = 0.0f,
+    .rightSprites = {
+        {.spriteX = 32, .spriteY = 0, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT }
+    },
+    .leftSprites = {
+        {.spriteX = 32, .spriteY = 32, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT }
+    },
+    .spriteCount = 1
+};
+
+SpriteAnimation crouchingAnimation = {
+    .animationSpeed = 0.0f,
+    .rightSprites = {
+        {.spriteX = 48, .spriteY = 0, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT }
+    },
+    .leftSprites = {
+        {.spriteX = 48, .spriteY = 32, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT }
+    },
+    .spriteCount = 1
+};
+
+SpriteAnimation standingAttackAnimation = {
+    .animationSpeed = .07f,
+    .rightSprites = {
+        {.spriteX = 0, .spriteY = 0, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT },
+        {.spriteX = 16, .spriteY = 64, .spriteWidth = SPRITE_WIDTH + 1, .spriteHeight = SPRITE_HEIGHT},
+        {.spriteX = 64, .spriteY = 64, .spriteWidth = SPRITE_WIDTH + 27, .spriteHeight = SPRITE_HEIGHT, .spriteAnimationDelay = 0.38f}
+    },
+    .leftSprites = {
+        {.spriteX = 0, .spriteY = 32, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT },
+        {.spriteX = 16, .spriteY = 96, .spriteWidth = SPRITE_WIDTH + 1, .spriteHeight = SPRITE_HEIGHT},
+        {.spriteX = 37, .spriteY = 96, .spriteWidth = SPRITE_WIDTH + 27, .spriteHeight = SPRITE_HEIGHT, .spriteAnimationDelay = 0.38f}
+    },
+    .spriteCount = 3
+};
+
 SpriteAnimation* currentAnimationData;
 
 enum PLAYER_ANIMATION_STATE currentAnimationState = IDLE;
@@ -38,14 +100,26 @@ void InitPlayerAnimation() {
 void UpdateAnimationState(const Player* player) {
     enum PLAYER_ANIMATION_STATE targetAnimationState;
 
-    if (!player->isGrounded) {
+    if (player->isAttacking) {
+        if (player->isCrouching) {
+            targetAnimationState = CROUCH_ATTACKING;
+            // todo: update this to crouch attack animation
+            currentAnimationData = &crouchingAnimation;
+        }
+        else {
+            targetAnimationState = STAND_ATTACKING;
+            currentAnimationData = &standingAttackAnimation;
+        }
+    }
+
+    else if (!player->isGrounded) {
         targetAnimationState = JUMPING;
         currentAnimationData = &jumpingAnimation;
     }
     else {
         if (player->isCrouching) {
-            targetAnimationState = CROUCHING;
-            currentAnimationData = &crouchingAnimation;
+                targetAnimationState = CROUCHING;
+                currentAnimationData = &crouchingAnimation;
         }
         else {
             if (PLAYER_INPUT_X == 0) {
@@ -64,37 +138,53 @@ void UpdateAnimationState(const Player* player) {
         currentSpriteIndex = 0;
         currentSpriteChangeTime = 0.0f;
     }
-}
 
-void UpdateSpriteFacingDirection(Player *player) {
-    if (PLAYER_INPUT_X != 0) {
-        player->facingDirection = PLAYER_INPUT_X;
-    }
-    if (player->facingDirection == -1) {
-        sourceRect.y = 32;
-    }
-    else {
-        sourceRect.y = 0;
-    }
+    //printf("player animation state: %d\n", currentAnimationState);
 }
 
 void UpdatePlayerAnimation(Player *player) {
-    UpdateSpriteFacingDirection(player);
-    UpdateAnimationState(player);
 
-    currentSpriteChangeTime += GetFrameTime();
-    if (currentSpriteChangeTime > currentAnimationData->animationSpeed) {
-        currentSpriteIndex++;
-        currentSpriteChangeTime = 0.0f;
-
-        if (currentSpriteIndex >= strlen(currentAnimationData->animationFrames)) {
-            currentSpriteIndex = 0;
-        }
+    // update playerFacingDirection
+    if (PLAYER_INPUT_X != 0 && !player->isAttacking) {
+        player->facingDirection = PLAYER_INPUT_X;
     }
 
-    const int frameValue = currentAnimationData->animationFrames[currentSpriteIndex] - '0';
-    sourceRect.x = 16.f * frameValue;
+    // update currentAnimationData
+    UpdateAnimationState(player);
 
+    // update sprite delay time
+    if (currentSpriteDelayTime > 0.0f) {
+        currentSpriteDelayTime -= GetFrameTime();
+    }
+    else {
+        // determine which sprite set we should use
+        const Sprite* currentSprites = (player->facingDirection == -1) ? currentAnimationData->leftSprites : currentAnimationData->rightSprites;
+
+        // sprite animating iterator
+        currentSpriteChangeTime += GetFrameTime(); // timer
+        if (currentSpriteChangeTime > currentAnimationData->animationSpeed) {
+            // timer reached time to change sprite
+            currentSpriteIndex++;
+            currentSpriteChangeTime = 0.0f;
+            currentSpriteDelayTime = currentSprites[currentSpriteIndex].spriteAnimationDelay;
+
+            if (currentSpriteIndex >= currentAnimationData->spriteCount) {
+
+                // check if its the end of an attack animation, if so, then set attacking to false
+                if (currentAnimationData == &standingAttackAnimation) {
+                    player->isAttacking = false;
+                }
+
+                // reached end of array, reset to 0
+                currentSpriteIndex = 0;
+            }
+        }
+
+        // Update sprite rect
+        sourceRect = (Rectangle) {currentSprites[currentSpriteIndex].spriteX, currentSprites[currentSpriteIndex].spriteY, currentSprites[currentSpriteIndex].spriteWidth, currentSprites[currentSpriteIndex].spriteHeight}; // NOLINT(*-narrowing-conversions)
+    }
+
+    // just make sure the Dest Rect is at the position of the player
     destRect.x = player->x;
     destRect.y = player->y;
 }

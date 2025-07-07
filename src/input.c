@@ -4,6 +4,7 @@
 int PLAYER_INPUT_X = 0;
 int PLAYER_INPUT_JUMP = 0;
 int PLAYER_INPUT_DOWN = 0;
+int PLAYER_INPUT_ATTACK = 0;
 
 void ReadInputs() {
 
@@ -15,7 +16,9 @@ void ReadInputs() {
 
     PLAYER_INPUT_DOWN = IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN);
 
-    if (IsKeyDown(KEY_SPACE)) {
+    PLAYER_INPUT_ATTACK = IsKeyDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_Z);
+
+    if (IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_X)) {
         PLAYER_INPUT_JUMP = 1;
     }
 

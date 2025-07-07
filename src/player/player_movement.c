@@ -78,17 +78,17 @@ void UpdatePlayerMovement(Player *player) {
     // X movement
     if (!player->isCrouching) {
         float moveX = 0.0f;
-        if (player->isGrounded) {
+        if (player->isGrounded && !player->isAttacking) {
             moveX = (float)PLAYER_INPUT_X * frameTime * PLAYER_MOVE_SPEED;
             player->storedJumpDirection = PLAYER_INPUT_X;
-        } else {
+        } else if (!player->isGrounded) {
             moveX = (float)player->storedJumpDirection * frameTime * PLAYER_MOVE_SPEED;
         }
         MovePlayer(player, moveX, 0.0f);
     }
 
     // JUMP movement
-    if (PLAYER_INPUT_JUMP && player->isGrounded && !player->isCrouching && !isJumping && !PLAYER_JUMPED_THIS_INPUT && postJumpRecoveryTime <= 0.f) {
+    if (PLAYER_INPUT_JUMP && player->isGrounded && !player->isCrouching && !isJumping && !PLAYER_JUMPED_THIS_INPUT && postJumpRecoveryTime <= 0.f && !player->isAttacking) {
         PLAYER_JUMPED_THIS_INPUT = true;
         isJumping = true;
         currentJumpTime = 0.0f;

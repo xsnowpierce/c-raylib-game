@@ -19,6 +19,9 @@ add_executable(game src/main.c
         src/player/player_movement.h
         src/player/player_sprite.c
         src/player/player_sprite.h
+        src/sprite/sprite.h
+        src/player/player_combat.c
+        src/player/player_combat.h
 )
 
 include_directories(resources)

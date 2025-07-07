@@ -14,6 +14,7 @@ typedef struct Player {
     int facingDirection;
     bool isCrouching;
     bool isGrounded;
+    bool isAttacking;
 } Player;
 
 

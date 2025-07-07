@@ -3,6 +3,7 @@
 #include <raylib.h>
 #include <stdbool.h>
 
+#include "player_combat.h"
 #include "../defs.h"
 #include "player_movement.h"
 #include "player_sprite.h"
@@ -20,6 +21,7 @@ void InitPlayer(Player *player) {
 
 void UpdatePlayer(Player *player) {
     UpdatePlayerMovement(player);
+    UpdatePlayerCombat(player);
     UpdatePlayerAnimation(player);
 }
 
