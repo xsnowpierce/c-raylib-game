@@ -22,8 +22,8 @@ typedef struct SpriteAnimation {
 
 SpriteAnimation idleAnimation = {0.0f, "0"};
 SpriteAnimation walkingAnimation = {0.225f, "1020"};
-SpriteAnimation jumpingAnimation = {0.0f, "3"};
-SpriteAnimation crouchingAnimation = {0.0f, "4"};
+SpriteAnimation jumpingAnimation = {0.0f, "2"};
+SpriteAnimation crouchingAnimation = {0.0f, "3"};
 SpriteAnimation* currentAnimationData;
 
 enum PLAYER_ANIMATION_STATE currentAnimationState = IDLE;
@@ -70,7 +70,12 @@ void UpdateSpriteFacingDirection(Player *player) {
     if (PLAYER_INPUT_X != 0) {
         player->facingDirection = PLAYER_INPUT_X;
     }
-    sourceRect.width = SPRITE_WIDTH * (player->facingDirection < 0 ? -1 : 1);
+    if (player->facingDirection == -1) {
+        sourceRect.y = 32;
+    }
+    else {
+        sourceRect.y = 0;
+    }
 }
 
 void UpdatePlayerAnimation(Player *player) {

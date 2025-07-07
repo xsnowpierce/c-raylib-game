@@ -87,8 +87,8 @@ void UpdatePlayerMovement(Player *player) {
         MovePlayer(player, moveX, 0.0f);
     }
 
-
-    if (PLAYER_INPUT_JUMP && player->isGrounded && !isJumping && !PLAYER_JUMPED_THIS_INPUT && postJumpRecoveryTime <= 0.f) {
+    // JUMP movement
+    if (PLAYER_INPUT_JUMP && player->isGrounded && !player->isCrouching && !isJumping && !PLAYER_JUMPED_THIS_INPUT && postJumpRecoveryTime <= 0.f) {
         PLAYER_JUMPED_THIS_INPUT = true;
         isJumping = true;
         currentJumpTime = 0.0f;
@@ -101,6 +101,7 @@ void UpdatePlayerMovement(Player *player) {
         isJumping = false;
     }
 
+    // Y movement
     const float verticalVelocity = jumpVelocity + PLAYER_GRAVITY * currentJumpTime;
     const float moveY = verticalVelocity * frameTime;
 
@@ -114,6 +115,7 @@ void UpdatePlayerMovement(Player *player) {
     Rectangle targetRect = GetPlayerCollider(player);
     targetRect.y += 1;
 
+    // COLLISION detection
     const CollisionRects collisionRects = GetCollisionRects();
     bool is_grounded = false;
     for (int i = 0; i < collisionRects.count; i++) {

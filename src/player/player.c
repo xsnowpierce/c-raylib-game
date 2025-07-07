@@ -42,18 +42,8 @@ Rectangle GetPlayerCollider(const Player *player) {
 
 Rectangle GetPlayerHitbox(const Player *player) {
 
-    // STANDARD HITBOX
-    if (!player->isCrouching && player->isGrounded) {
-        return (Rectangle){
-            player->x - SPRITE_WIDTH / 2,
-            player->y - SPRITE_HEIGHT,
-            SPRITE_WIDTH - 1,
-            SPRITE_HEIGHT
-        };
-    }
-
     // CROUCHING HITBOX
-    else if (player->isCrouching && player->isGrounded) {
+    if (player->isCrouching && player->isGrounded) {
         return (Rectangle){
             player->x - SPRITE_WIDTH / 2,
             player->y - SPRITE_HEIGHT + 12,
@@ -62,11 +52,11 @@ Rectangle GetPlayerHitbox(const Player *player) {
         };
     }
 
-    // JUMPING HITBOX
+    // STANDARD HITBOX
     return (Rectangle){
         player->x - SPRITE_WIDTH / 2,
-        player->y - SPRITE_HEIGHT + 4,
+        player->y - SPRITE_HEIGHT,
         SPRITE_WIDTH - 1,
-        20
+        SPRITE_HEIGHT
     };
 }
