@@ -1,0 +1,4 @@
+# ninja log v6
+1	5	1752109406744753156	resources	6fc26d73cfc0b580
+1	5	1752109406744753156	/home/snow/Development/c-raylib-game/build/resources	6fc26d73cfc0b580
+6	162	1752109406745753150	CMakeFiles/game.dir/src/lib/parson.c.o	628ec91aa802871e
