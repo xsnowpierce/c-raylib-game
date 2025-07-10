@@ -1,0 +1,47 @@
+[
+{
+  "directory": "/home/snow/Development/c-raylib-game/build",
+  "command": "/usr/bin/gcc-12  -I/home/snow/Development/c-raylib-game/resources -g -std=gnu99 -o CMakeFiles/game.dir/src/main.c.o -c /home/snow/Development/c-raylib-game/src/main.c",
+  "file": "/home/snow/Development/c-raylib-game/src/main.c"
+},
+{
+  "directory": "/home/snow/Development/c-raylib-game/build",
+  "command": "/usr/bin/gcc-12  -I/home/snow/Development/c-raylib-game/resources -g -std=gnu99 -o CMakeFiles/game.dir/src/input.c.o -c /home/snow/Development/c-raylib-game/src/input.c",
+  "file": "/home/snow/Development/c-raylib-game/src/input.c"
+},
+{
+  "directory": "/home/snow/Development/c-raylib-game/build",
+  "command": "/usr/bin/gcc-12  -I/home/snow/Development/c-raylib-game/resources -g -std=gnu99 -o CMakeFiles/game.dir/src/player/player.c.o -c /home/snow/Development/c-raylib-game/src/player/player.c",
+  "file": "/home/snow/Development/c-raylib-game/src/player/player.c"
+},
+{
+  "directory": "/home/snow/Development/c-raylib-game/build",
+  "command": "/usr/bin/gcc-12  -I/home/snow/Development/c-raylib-game/resources -g -std=gnu99 -o CMakeFiles/game.dir/src/level/world.c.o -c /home/snow/Development/c-raylib-game/src/level/world.c",
+  "file": "/home/snow/Development/c-raylib-game/src/level/world.c"
+},
+{
+  "directory": "/home/snow/Development/c-raylib-game/build",
+  "command": "/usr/bin/gcc-12  -I/home/snow/Development/c-raylib-game/resources -g -std=gnu99 -o CMakeFiles/game.dir/src/level/tilemap.c.o -c /home/snow/Development/c-raylib-game/src/level/tilemap.c",
+  "file": "/home/snow/Development/c-raylib-game/src/level/tilemap.c"
+},
+{
+  "directory": "/home/snow/Development/c-raylib-game/build",
+  "command": "/usr/bin/gcc-12  -I/home/snow/Development/c-raylib-game/resources -g -std=gnu99 -o CMakeFiles/game.dir/src/lib/parson.c.o -c /home/snow/Development/c-raylib-game/src/lib/parson.c",
+  "file": "/home/snow/Development/c-raylib-game/src/lib/parson.c"
+},
+{
+  "directory": "/home/snow/Development/c-raylib-game/build",
+  "command": "/usr/bin/gcc-12  -I/home/snow/Development/c-raylib-game/resources -g -std=gnu99 -o CMakeFiles/game.dir/src/player/player_movement.c.o -c /home/snow/Development/c-raylib-game/src/player/player_movement.c",
+  "file": "/home/snow/Development/c-raylib-game/src/player/player_movement.c"
+},
+{
+  "directory": "/home/snow/Development/c-raylib-game/build",
+  "command": "/usr/bin/gcc-12  -I/home/snow/Development/c-raylib-game/resources -g -std=gnu99 -o CMakeFiles/game.dir/src/player/player_sprite.c.o -c /home/snow/Development/c-raylib-game/src/player/player_sprite.c",
+  "file": "/home/snow/Development/c-raylib-game/src/player/player_sprite.c"
+},
+{
+  "directory": "/home/snow/Development/c-raylib-game/build",
+  "command": "/usr/bin/gcc-12  -I/home/snow/Development/c-raylib-game/resources -g -std=gnu99 -o CMakeFiles/game.dir/src/player/player_combat.c.o -c /home/snow/Development/c-raylib-game/src/player/player_combat.c",
+  "file": "/home/snow/Development/c-raylib-game/src/player/player_combat.c"
+}
+]
