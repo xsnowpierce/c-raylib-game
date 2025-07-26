@@ -8,19 +8,24 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/snow/Development/c-raylib-game/src/input.c" "CMakeFiles/game.dir/src/input.c.o" "gcc" "CMakeFiles/game.dir/src/input.c.o.d"
-  "/home/snow/Development/c-raylib-game/src/level/tilemap.c" "CMakeFiles/game.dir/src/level/tilemap.c.o" "gcc" "CMakeFiles/game.dir/src/level/tilemap.c.o.d"
-  "/home/snow/Development/c-raylib-game/src/level/world.c" "CMakeFiles/game.dir/src/level/world.c.o" "gcc" "CMakeFiles/game.dir/src/level/world.c.o.d"
-  "/home/snow/Development/c-raylib-game/src/lib/parson.c" "CMakeFiles/game.dir/src/lib/parson.c.o" "gcc" "CMakeFiles/game.dir/src/lib/parson.c.o.d"
-  "/home/snow/Development/c-raylib-game/src/main.c" "CMakeFiles/game.dir/src/main.c.o" "gcc" "CMakeFiles/game.dir/src/main.c.o.d"
-  "/home/snow/Development/c-raylib-game/src/player/player.c" "CMakeFiles/game.dir/src/player/player.c.o" "gcc" "CMakeFiles/game.dir/src/player/player.c.o.d"
-  "/home/snow/Development/c-raylib-game/src/player/player_combat.c" "CMakeFiles/game.dir/src/player/player_combat.c.o" "gcc" "CMakeFiles/game.dir/src/player/player_combat.c.o.d"
-  "/home/snow/Development/c-raylib-game/src/player/player_movement.c" "CMakeFiles/game.dir/src/player/player_movement.c.o" "gcc" "CMakeFiles/game.dir/src/player/player_movement.c.o.d"
-  "/home/snow/Development/c-raylib-game/src/player/player_sprite.c" "CMakeFiles/game.dir/src/player/player_sprite.c.o" "gcc" "CMakeFiles/game.dir/src/player/player_sprite.c.o.d"
+  "/home/snow/Documents/dev/c-raylib-game/src/input.c" "CMakeFiles/game.dir/src/input.c.o" "gcc" "CMakeFiles/game.dir/src/input.c.o.d"
+  "/home/snow/Documents/dev/c-raylib-game/src/level/tilemap.c" "CMakeFiles/game.dir/src/level/tilemap.c.o" "gcc" "CMakeFiles/game.dir/src/level/tilemap.c.o.d"
+  "/home/snow/Documents/dev/c-raylib-game/src/level/world.c" "CMakeFiles/game.dir/src/level/world.c.o" "gcc" "CMakeFiles/game.dir/src/level/world.c.o.d"
+  "/home/snow/Documents/dev/c-raylib-game/src/lib/parson.c" "CMakeFiles/game.dir/src/lib/parson.c.o" "gcc" "CMakeFiles/game.dir/src/lib/parson.c.o.d"
+  "/home/snow/Documents/dev/c-raylib-game/src/main.c" "CMakeFiles/game.dir/src/main.c.o" "gcc" "CMakeFiles/game.dir/src/main.c.o.d"
+  "/home/snow/Documents/dev/c-raylib-game/src/player/player.c" "CMakeFiles/game.dir/src/player/player.c.o" "gcc" "CMakeFiles/game.dir/src/player/player.c.o.d"
+  "/home/snow/Documents/dev/c-raylib-game/src/player/player_combat.c" "CMakeFiles/game.dir/src/player/player_combat.c.o" "gcc" "CMakeFiles/game.dir/src/player/player_combat.c.o.d"
+  "/home/snow/Documents/dev/c-raylib-game/src/player/player_movement.c" "CMakeFiles/game.dir/src/player/player_movement.c.o" "gcc" "CMakeFiles/game.dir/src/player/player_movement.c.o.d"
+  "/home/snow/Documents/dev/c-raylib-game/src/player/player_sprite.c" "CMakeFiles/game.dir/src/player/player_sprite.c.o" "gcc" "CMakeFiles/game.dir/src/player/player_sprite.c.o.d"
+  "" "game" "gcc" "CMakeFiles/game.dir/link.d"
   )
 
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

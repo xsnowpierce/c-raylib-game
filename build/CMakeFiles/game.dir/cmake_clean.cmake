@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/game.dir/link.d"
   "CMakeFiles/game.dir/src/input.c.o"
   "CMakeFiles/game.dir/src/input.c.o.d"
   "CMakeFiles/game.dir/src/level/tilemap.c.o"
