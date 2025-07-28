@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "defs.h"
 #include "raylib.h"
 #include "input.h"

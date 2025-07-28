@@ -1,11 +1,7 @@
 #include "player_sprite.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "raylib.h"
 #include "../input.h"
-#include <string.h>
 
 #include "../defs.h"
 #include "../sprite/sprite.h"

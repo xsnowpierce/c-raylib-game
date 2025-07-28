@@ -1,11 +1,9 @@
 #include "player_movement.h"
 #include "../level/tilemap.h"
 #include "../input.h"
-#include "../defs.h"
 #include <raylib.h>
 #include <stdbool.h>
 #include <stddef.h>
-#include <stdio.h>
 
 #define PLAYER_MOVE_SPEED 80
 #define PLAYER_JUMP_SPEED (-220.0f)

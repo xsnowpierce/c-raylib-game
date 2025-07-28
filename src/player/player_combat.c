@@ -3,8 +3,6 @@
 //
 #include "player_combat.h"
 
-#include <stdio.h>
-
 #include "../input.h"
 
 void UpdatePlayerCombat(Player *player) {
