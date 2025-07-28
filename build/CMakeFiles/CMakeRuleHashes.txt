@@ -1,2 +1,0 @@
-# Hashes of file build rules.
-af494f4514f85149cbed07c869db3622 resources

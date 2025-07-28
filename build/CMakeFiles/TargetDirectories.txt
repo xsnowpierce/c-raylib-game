@@ -1,4 +1,0 @@
-/home/snow/Documents/dev/c-raylib-game/build/CMakeFiles/game.dir
-/home/snow/Documents/dev/c-raylib-game/build/CMakeFiles/copy_resources.dir
-/home/snow/Documents/dev/c-raylib-game/build/CMakeFiles/edit_cache.dir
-/home/snow/Documents/dev/c-raylib-game/build/CMakeFiles/rebuild_cache.dir
