@@ -3,9 +3,12 @@
 //
 #pragma once
 
+#include <stdbool.h>
 extern int PLAYER_INPUT_X;
-extern int PLAYER_INPUT_JUMP;
-extern int PLAYER_INPUT_DOWN;
-extern int PLAYER_INPUT_ATTACK;
+extern bool PLAYER_INPUT_LEFT;
+extern bool PLAYER_INPUT_RIGHT;
+extern bool PLAYER_INPUT_JUMP;
+extern bool PLAYER_INPUT_DOWN;
+extern bool PLAYER_INPUT_ATTACK;
 
 void ReadInputs();

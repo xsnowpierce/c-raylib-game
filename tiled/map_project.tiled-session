@@ -3,8 +3,9 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "map.json",
     "expandedProjectPaths": [
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -20,11 +21,11 @@
             "scaleInDock": 1
         },
         "map.json": {
-            "scale": 4.6275390624999995,
+            "scale": 4,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 64.07293293377792,
-                "y": 128.03781707677376
+                "x": 141.375,
+                "y": 210.125
             }
         },
         "map.tmx": {
@@ -51,10 +52,13 @@
     "map.tileWidth": 8,
     "map.width": 32,
     "openFiles": [
+        "map.json",
+        "tileset_01.tsx"
     ],
     "project": "map_project.tiled-project",
     "recentFiles": [
         "tileset_01.tsx",
+        "map.json",
         "map.tmx",
         "/home/snow/Documents/dev/c-raylib-game/resources/map.json"
     ],

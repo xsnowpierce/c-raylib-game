@@ -67,17 +67,19 @@ SpriteAnimation crouchingAnimation = {
     .spriteCount = 1
 };
 
+#define PLAYER_SWORD_HOLD_TIME 0.2f
+
 SpriteAnimation standingAttackAnimation = {
     .animationSpeed = .07f,
     .rightSprites = {
         {.spriteX = 0, .spriteY = 0, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT },
         {.spriteX = 16, .spriteY = 64, .spriteWidth = SPRITE_WIDTH + 1, .spriteHeight = SPRITE_HEIGHT},
-        {.spriteX = 64, .spriteY = 64, .spriteWidth = SPRITE_WIDTH + 27, .spriteHeight = SPRITE_HEIGHT, .spriteAnimationDelay = 0.38f}
+        {.spriteX = 64, .spriteY = 64, .spriteWidth = SPRITE_WIDTH + 27, .spriteHeight = SPRITE_HEIGHT, .spriteAnimationDelay = PLAYER_SWORD_HOLD_TIME}
     },
     .leftSprites = {
         {.spriteX = 0, .spriteY = 32, .spriteWidth = SPRITE_WIDTH, .spriteHeight = SPRITE_HEIGHT },
         {.spriteX = 16, .spriteY = 96, .spriteWidth = SPRITE_WIDTH + 1, .spriteHeight = SPRITE_HEIGHT},
-        {.spriteX = 37, .spriteY = 96, .spriteWidth = SPRITE_WIDTH + 27, .spriteHeight = SPRITE_HEIGHT, .spriteAnimationDelay = 0.38f}
+        {.spriteX = 37, .spriteY = 96, .spriteOffsetX = -27, .spriteWidth = SPRITE_WIDTH + 27, .spriteHeight = SPRITE_HEIGHT, .spriteAnimationDelay = PLAYER_SWORD_HOLD_TIME}
     },
     .spriteCount = 3
 };
@@ -148,13 +150,19 @@ void UpdatePlayerAnimation(Player *player) {
     // update currentAnimationData
     UpdateAnimationState(player);
 
+
+    // create potential sprite offset
+    int spriteXOffset = 0;
+
+    // determine which sprite set we should use
+    const Sprite* currentSprites = (player->facingDirection == -1) ? currentAnimationData->leftSprites : currentAnimationData->rightSprites;
+
     // update sprite delay time
     if (currentSpriteDelayTime > 0.0f) {
         currentSpriteDelayTime -= GetFrameTime();
     }
     else {
-        // determine which sprite set we should use
-        const Sprite* currentSprites = (player->facingDirection == -1) ? currentAnimationData->leftSprites : currentAnimationData->rightSprites;
+        
 
         // sprite animating iterator
         currentSpriteChangeTime += GetFrameTime(); // timer
@@ -178,10 +186,17 @@ void UpdatePlayerAnimation(Player *player) {
 
         // Update sprite rect
         sourceRect = (Rectangle) {currentSprites[currentSpriteIndex].spriteX, currentSprites[currentSpriteIndex].spriteY, currentSprites[currentSpriteIndex].spriteWidth, currentSprites[currentSpriteIndex].spriteHeight}; // NOLINT(*-narrowing-conversions)
+        
+        destRect.width = currentSprites[currentSpriteIndex].spriteWidth;
+        destRect.height = currentSprites[currentSpriteIndex].spriteHeight;
+
+        
     }
 
+    spriteXOffset = currentSprites[currentSpriteIndex].spriteOffsetX;
+
     // just make sure the Dest Rect is at the position of the player
-    destRect.x = player->x;
+    destRect.x = player->x + spriteXOffset;
     destRect.y = player->y;
 }
 

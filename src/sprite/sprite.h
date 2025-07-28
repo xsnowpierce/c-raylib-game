@@ -10,6 +10,7 @@
 typedef struct {
     int spriteX, spriteY;
     int spriteWidth, spriteHeight;
+    int spriteOffsetX, spriteOffsetY;
     float spriteAnimationDelay;
 } Sprite;
 

@@ -4,12 +4,17 @@
 #include "player_combat.h"
 
 #include "../input.h"
+#include <stdbool.h>
+
+bool ATTACK_INPUT_LAST_FRAME = false;
 
 void UpdatePlayerCombat(Player *player) {
-    //printf("player is attacking: %d\n", player->isAttacking);
+
     if (!player->isAttacking) {
-        if (PLAYER_INPUT_ATTACK) {
+        if (PLAYER_INPUT_ATTACK && ATTACK_INPUT_LAST_FRAME == false) {
             player->isAttacking = true;
         }
     }
+
+    ATTACK_INPUT_LAST_FRAME = PLAYER_INPUT_ATTACK;
 }
