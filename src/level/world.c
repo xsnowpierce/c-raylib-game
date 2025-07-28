@@ -6,7 +6,7 @@
 TileMap worldMap;
 
 void CreateWorld() {
-    LoadTileMap(&worldMap, "resources/map.json", "resources/tileset.png");
+    LoadTileMap(&worldMap, "tiled/map.json", "tiled/tileset.png");
 }
 
 void DrawWorld() {

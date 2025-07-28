@@ -37,5 +37,14 @@ add_custom_command(
         COMMENT "Copying resources to build directory"
 )
 
+set(TILED_DIR "${CMAKE_SOURCE_DIR}/tiled")
+set(TILED_DEST_DIR "${CMAKE_BINARY_DIR}/tiled")
+
+add_custom_command(
+        OUTPUT ${TILED_DEST_DIR}
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${RESOURCE_DIR} ${DEST_DIR}
+        COMMENT "Copying tiled assets to build directory"
+)
+
 add_custom_target(copy_resources ALL DEPENDS ${DEST_DIR})
 add_dependencies(game copy_resources)

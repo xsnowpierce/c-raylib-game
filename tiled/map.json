@@ -7,7 +7,7 @@
                 {
                  "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1,
                     0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1,
@@ -122,12 +122,12 @@
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.11.1-99-gec89c545",
+ "tiledversion":"1.11.1",
  "tileheight":8,
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/..\/..\/..\/snap\/tiled\/4760\/testgame\/tileset.tsx"
+         "source":"tileset_01.tsx"
         }],
  "tilewidth":8,
  "type":"map",
