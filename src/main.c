@@ -1,4 +1,5 @@
 #include "defs.h"
+#include "enemy/enemy.h"
 #include "raylib.h"
 #include "input.h"
 #include "player/player.h"
@@ -20,6 +21,7 @@ int main(void) {
 
     Player player;
     InitPlayer(&player);
+    InitEnemies();
     CreateWorld();
 
     Camera2D camera;
@@ -34,6 +36,7 @@ int main(void) {
         ReadInputs();
         camera.target = (Vector2) {player.x - 8, camera.target.y};
         UpdatePlayer(&player);
+        UpdateEnemies();
         //printf("player is grounded: %d\n", player.isGrounded);
 
         BeginDrawing();
@@ -44,6 +47,7 @@ int main(void) {
 
         DrawWorld();
         DrawPlayer(&player);
+        DrawEnemies();
 
         EndMode2D();
 

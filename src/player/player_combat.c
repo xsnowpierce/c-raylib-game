@@ -8,9 +8,17 @@
 
 bool ATTACK_INPUT_LAST_FRAME = false;
 
+bool CanPlayerAttack(Player *player) {
+    if(player->isAttacking){
+        return false;
+    }
+
+    return true;
+}
+
 void UpdatePlayerCombat(Player *player) {
 
-    if (!player->isAttacking) {
+    if (CanPlayerAttack(player) && !player->isAttacking) {
         if (PLAYER_INPUT_ATTACK && ATTACK_INPUT_LAST_FRAME == false) {
             player->isAttacking = true;
         }
@@ -18,3 +26,4 @@ void UpdatePlayerCombat(Player *player) {
 
     ATTACK_INPUT_LAST_FRAME = PLAYER_INPUT_ATTACK;
 }
+
