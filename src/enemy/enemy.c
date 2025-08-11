@@ -1,5 +1,5 @@
 #include "enemy.h"
-#include "raylib.h"x
+#include "raylib.h"
 
 Enemy enemies[ENEMY_ARRAY_SIZE];
 Texture2D enemyTexture;
